@@ -1,0 +1,101 @@
+<!-- content @s -->
+<div class="nk-content">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">Interactive Learning</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="nk-block">
+                    <div class="card">
+                        <div class="card-inner">
+                            <h5 class="card-title">Choose a Category</h5>
+                            <div class="row g-3 align-center">
+                                <div class="col-lg-5">
+                                    <div class="form-group">
+                                        <label class="form-label" for="category">Select Category</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <select [(ngModel)]="selectedCategory" id="category" class="form-select">
+                                                <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-lg-7 offset-lg-5">
+                                    <div class="form-group mt-2">
+                                        <button (click)="loadQuestions()" class="btn btn-lg btn-primary">Load Questions</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="questions.length > 0" class="card mt-3">
+                        <div class="card-inner">
+                            <h5 class="card-title">Interactive Learning</h5>
+                            <div *ngIf="currentQuestionIndex < questions.length">
+                                <div class="mb-3">
+                                    <strong>Question {{ currentQuestionIndex + 1 }}:</strong>
+                                    {{ questions[currentQuestionIndex].Question }}
+                                </div>
+                                <form [formGroup]="userResponseForm">
+                                    <div class="row g-3">
+                                        <div class="col-lg-7">
+                                            <div class="form-group">
+                                                <label class="form-label" for="response">Your Response</label>
+                                                <div class="form-control-wrap">
+                                                    <input formControlName="response" name="response" type="text" class="form-control" id="response">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <div class="form-group mt-2">
+                                                <button (click)="showAnswer()" class="btn btn-lg btn-primary">Show Answer</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="row g-3">
+                                    <div class="col-lg-7 offset-lg-5">
+                                        <div class="form-group mt-2">
+                                            <button *ngIf="currentQuestionIndex === questions.length - 1" (click)="submitResponses()" class="btn btn-lg btn-primary">Submit Responses</button>
+                                            <button *ngIf="currentQuestionIndex < questions.length - 1" (click)="saveResponse()" class="btn btn-lg btn-primary">Next Question</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="currentQuestionIndex === questions.length">
+                                <p>All questions completed. You can now submit your responses.</p>
+                            </div>
+                            <!-- Add this section to display verification results -->
+                            <div *ngIf="showVerificationResults" class="card mt-3">
+                                <div class="card-inner">
+                                    <h5 class="card-title">Verification Results</h5>
+                                    <div *ngFor="let userResponse of userResponses; let i = index">
+                                        <p>
+                                            Question {{ i + 1 }}: {{ questions[i].Question }}
+                                            <br>
+                                            Your Response: {{ userResponse.response }}
+                                            <br>
+                                            {{ userResponse.isCorrect ? 'Correct' : 'Incorrect' }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content @e -->
