@@ -10,12 +10,12 @@ This project is a collaborative effort with contributions from multiple team mem
   - Stored user tokens, along with other data such as user ID, securely in the local storage.
   - Employed encryption for sensitive user information.
 
-- **Mehdi [Last Name]**
+- **Mehdi Jegham**
   - Developed the CRUD operations for managing categories.
   - Implemented functionality for creating, reading, updating, and deleting category information.
   - Also contributed to the CRUD operations for managing fiche (records).
 
-- **Khalil [Last Name]**
+- **Khalil Hamrouni**
   - Worked on the interactive learning module of the project.
   - Implemented features to enhance the interactive learning experience.
 
